@@ -17,5 +17,19 @@ export const chatRouter = router({
       })
       return chat
     }
-  )
+  ),
+  getById: publicProcedure.input(z.number()).query(async (opts) => {
+    const chat = await prisma.chat.findUnique({
+      where: {
+        id: opts.input
+      },
+      include: {
+        messages: true
+      }
+    })
+    if (!chat) {
+      return null
+    }
+    return chat
+  })
 });

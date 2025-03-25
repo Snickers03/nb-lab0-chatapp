@@ -2,14 +2,18 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { useState } from "react"
 
-export function MessageForm({ chatId }: { chatId: string }) {
+interface Props {
+  chatId: string
+  addMessage: (content: any) => void
+}
+export function MessageForm({ chatId, addMessage }: Props) {
   const [sender, setSender] = useState("")
   const [content, setContent] = useState("")
 
@@ -17,9 +21,7 @@ export function MessageForm({ chatId }: { chatId: string }) {
     e.preventDefault()
     if (!sender.trim() || !content.trim()) return
 
-    // In a real app, you would send the message to the server
-    // For now, we'll just clear the form
-    console.log("Message sent:", { chatId, sender, content })
+    addMessage({ chatId: Number(chatId), sender, content })
     setContent("")
   }
 

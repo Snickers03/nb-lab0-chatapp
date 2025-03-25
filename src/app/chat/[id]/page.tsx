@@ -1,22 +1,31 @@
-import Link from "next/link"
-import { MessageTable } from "@/components/message-table"
+"use client"
+
+import { trpc } from "@/app/_trpc/client"
 import { MessageForm } from "@/components/message-form"
+import { MessageTable } from "@/components/message-table"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { use } from "react"
 
-// This would normally come from a database
-const getChatById = (id: string) => {
-  const chats = {
-    "1": { id: "1", topic: "General Discussion" },
-    "2": { id: "2", topic: "Technical Support" },
-    "3": { id: "3", topic: "Random Chat" },
+export default function ChatPage(props: {
+  params: Promise<{ id: string }>;
+}) {
+  const params = use(props.params);
+
+  const { data: chat, refetch } = trpc.chat.getById.useQuery(Number(params.id))
+ const { mutate: addMessage } = trpc.message.add.useMutation({
+    onSuccess: () => {
+      refetch()
+    }
+  })
+
+  if (!chat) {
+    return <div className="container mx-auto p-4 max-w-4xl">
+      <Link className="underline" href="/">Go back</Link>
+      <p>Chat not found</p>
+    </div>
   }
-
-  return chats[id as keyof typeof chats] || { id, topic: `Chat ${id}` }
-}
-
-export default function ChatPage({ params }: { params: { id: string } }) {
-  const chat = getChatById(params.id)
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
@@ -32,8 +41,8 @@ export default function ChatPage({ params }: { params: { id: string } }) {
       <h1 className="text-3xl font-bold mb-6">{chat.topic}</h1>
 
       <div className="space-y-6">
-        <MessageTable chatId={params.id} />
-        <MessageForm chatId={params.id} />
+        <MessageTable messages={chat.messages ?? []} />
+        <MessageForm addMessage={addMessage} chatId={params.id} />
       </div>
     </div>
   )
