@@ -2,6 +2,9 @@
 
 import { ChatList } from "@/components/chat-list"
 import { CreateChatForm } from "@/components/create-chat-form"
+import SocketStatus from "@/components/socket-status"
+import { socket } from "@/socket"
+import { useEffect } from "react"
 import { trpc } from "./_trpc/client"
 
 export default function Home() {
@@ -13,9 +16,26 @@ export default function Home() {
     }
   })
 
+  useEffect(() => {
+    // When any client emits "newChat", refetch the chats from the DB.
+    const handleNewChat = () => {
+      console.log("New chat received from socket, refetching...");
+      refetch();
+    };
+
+    socket.on("newChat", handleNewChat);
+
+    return () => {
+      socket.off("newChat", handleNewChat);
+    };
+  }, [refetch]);
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">ChatApp</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold mb-6">ChatApp</h1>
+        <SocketStatus />
+      </div>
 
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
         <div className="order-2 md:order-1">
