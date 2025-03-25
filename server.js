@@ -15,7 +15,7 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
 
   io.on("connection", (socket) => {
-    console.log("A user connected");
+    console.log("New connection:", socket.id);
     socket.on("newChat", (title) => {
       console.log("Received newChat:", title);
       io.emit("newChat", title);

@@ -4,6 +4,7 @@ import { ChatList } from "@/components/chat-list"
 import { CreateChatForm } from "@/components/create-chat-form"
 import SocketStatus from "@/components/socket-status"
 import { socket } from "@/socket"
+import { MessageCircleIcon } from "lucide-react"
 import { useEffect } from "react"
 import { trpc } from "./_trpc/client"
 
@@ -33,7 +34,10 @@ export default function Home() {
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold mb-6">ChatApp</h1>
+        <div className="flex items-center space-x-2">
+          <MessageCircleIcon className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl font-bold">lab0: ChatApp</h1>
+        </div>
         <SocketStatus />
       </div>
 
