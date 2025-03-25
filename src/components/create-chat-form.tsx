@@ -2,13 +2,17 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
-export function CreateChatForm() {
+interface Props {
+  addChat: (topic: string) => void
+}
+
+export function CreateChatForm({addChat}: Props) {
   const [chatTopic, setChatTopic] = useState("")
   const router = useRouter()
 

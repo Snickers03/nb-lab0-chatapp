@@ -1,23 +1,16 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
+import { Chat } from "@prisma/client"
 import { MessageSquare } from "lucide-react"
-
-// Mock data for demonstration
-const initialChats = [
-  { id: "1", topic: "General Discussion" },
-  { id: "2", topic: "Technical Support" },
-  { id: "3", topic: "Random Chat" },
-]
-
-export function ChatList() {
-  const [chats, setChats] = useState(initialChats)
-
+import Link from "next/link"
+import { Card, CardContent } from "./ui/card"
+interface Props {
+  chats: Chat[]
+}
+export function ChatList({chats}: Props) {
   return (
-    <div className="space-y-3">
-      {chats.length === 0 ? (
+    <div className="grid grid-cols-1 gap-3">
+{chats && chats.length === 0 ? (
         <p className="text-muted-foreground">No chats yet. Create one to get started!</p>
       ) : (
         chats.map((chat) => (
@@ -30,7 +23,7 @@ export function ChatList() {
             </Card>
           </Link>
         ))
-      )}
+      )} 
     </div>
   )
 }
