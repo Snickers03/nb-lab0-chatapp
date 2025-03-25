@@ -10,7 +10,7 @@ interface Props {
 export function ChatList({chats}: Props) {
   return (
     <div className="grid grid-cols-1 gap-3">
-{chats && chats.length === 0 ? (
+    {chats && chats.length === 0 ? (
         <p className="text-muted-foreground">No chats yet. Create one to get started!</p>
       ) : (
         chats.map((chat) => (

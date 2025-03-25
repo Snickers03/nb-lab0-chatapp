@@ -5,17 +5,17 @@ import { publicProcedure, router } from "../trpc";
 
 export const chatRouter = router({
   getAll: publicProcedure
-    .query(async (opts) => {
+    .query(async () => {
       const chats =  await prisma.chat.findMany()
       return chats
     }),
-    add: publicProcedure.input(z.string()).mutation(async (opts) => {
-        const chat = await prisma.chat.create({
-          data: {
-            topic: opts.input,
-          }
-        })
-        return chat
-      }
-    )
+  add: publicProcedure.input(z.string()).mutation(async (opts) => {
+      const chat = await prisma.chat.create({
+        data: {
+          topic: opts.input,
+        }
+      })
+      return chat
+    }
+  )
 });

@@ -19,11 +19,8 @@ export function CreateChatForm({addChat}: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!chatTopic.trim()) return
-
-    // In a real app, you would create the chat on the server
-    // For now, we'll just navigate to a new chat with a random ID
-    const newChatId = Math.random().toString(36).substring(2, 9)
-    router.push(`/chat/${newChatId}`)
+    addChat(chatTopic)
+    setChatTopic("")
   }
 
   return (

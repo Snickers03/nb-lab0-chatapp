@@ -1,3 +1,5 @@
+"use client"
+
 import { ChatList } from "@/components/chat-list"
 import { CreateChatForm } from "@/components/create-chat-form"
 import { trpc } from "./_trpc/client"
