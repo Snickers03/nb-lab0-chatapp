@@ -1,6 +1,7 @@
 "use client"
 
 import { trpc } from "@/app/_trpc/client"
+import { ChatNotFound } from "@/components/chat-not-found"
 import { MessageForm } from "@/components/message-form"
 import { MessageTable } from "@/components/message-table"
 import { Button } from "@/components/ui/button"
@@ -21,10 +22,7 @@ export default function ChatPage(props: {
   })
 
   if (!chat) {
-    return <div className="container mx-auto p-4 max-w-4xl">
-      <Link className="underline" href="/">Go back</Link>
-      <p>Chat not found</p>
-    </div>
+    return <ChatNotFound />
   }
 
   return (

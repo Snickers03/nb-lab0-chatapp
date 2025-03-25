@@ -25,8 +25,8 @@ export function CreateChatForm({addChat}: Props) {
 
   return (
     <Card>
-      <CardContent className="p-4">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-2">
             <label htmlFor="chatTopic" className="text-sm font-medium">
               Chat Topic

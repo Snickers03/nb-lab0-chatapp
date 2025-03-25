@@ -16,7 +16,7 @@ export function ChatList({chats}: Props) {
         chats.map((chat) => (
           <Link key={chat.id} href={`/chat/${chat.id}`}>
             <Card className="hover:bg-accent transition-colors cursor-pointer">
-              <CardContent className="p-4 flex items-center gap-3">
+              <CardContent className="px-4 py-0 flex items-center gap-3">
                 <MessageSquare className="h-5 w-5 text-primary" />
                 <span className="font-medium">{chat.topic}</span>
               </CardContent>
