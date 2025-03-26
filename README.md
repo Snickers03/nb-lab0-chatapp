@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💬 nb-lab0-chatapp
 
-## Getting Started
+> A modern real-time chat application built with Next.js 15, React 19, Socket.io, and tRPC.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.0.0-blue?style=flat-square&logo=react)
+![Socket.io](https://img.shields.io/badge/Socket.io-4.8.1-white?style=flat-square&logo=socket.io)
+![Prisma](https://img.shields.io/badge/Prisma-6.5.0-2D3748?style=flat-square&logo=prisma)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0.0-38B2AC?style=flat-square&logo=tailwind-css)
+
+## ✨ Features
+
+- 🚀 **Real-time messaging** powered by Socket.io
+- 🔒 **Type-safe API** with tRPC for end-to-end type safety
+- 💾 **Database integration** with Prisma ORM
+- 🎨 **Sleek UI** built with TailwindCSS 4
+- 📝 **Full TypeScript support** for a robust development experience
+
+## 🛠️ Tech Stack
+
+- 🖥️ **Frontend**: Next.js 15.2.4, React 19
+- 🔌 **Backend**: Next.js API routes, Socket.io server
+- 🔄 **API Layer**: tRPC for type-safe APIs
+- 🗄️ **Database**: Prisma ORM with PostgreSQL
+- 💅 **Styling**: TailwindCSS 4
+- 🔍 **Type Safety**: TypeScript, Zod
+- ⚡ **Development**: Turbopack for lightning-fast builds
+
+## 📋 Prerequisites
+
+- Node.js 20+
+- pnpm
+- PostgreSQL database
+
+## 🚀 Getting Started
+
+### 📥 Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/nb-lab0-chatapp.git
+cd nb-lab0-chatapp
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ⚙️ Environment Configuration
 
-## Learn More
+Create a `.env` file in the root directory:
 
-To learn more about Next.js, take a look at the following resources:
+```
+# -----------------------------------------------------------------------------
+# 🌐 App
+# -----------------------------------------------------------------------------
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# -----------------------------------------------------------------------------
+# 🗄️ Database (PostgreSQL)
+# -----------------------------------------------------------------------------
+DATABASE_URL="postgresql://username:password@localhost:5432/chatapp"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### 🔑 Environment Variables:
 
-## Deploy on Vercel
+- `NEXT_PUBLIC_BASE_URL`: Your app's base URL (for API calls and Socket.io)
+- `DATABASE_URL`: Your PostgreSQL connection string
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### ⚙️ Prisma Setup:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Generate Prisma client
+pnpm run generate
+
+# Push schema to database
+pnpm run push
+```
+
+### 🏃‍♂️ Running the Application
+
+#### 💻 Development Mode
+```bash
+pnpm run dev-server
+```
+
+#### 🚀 Production
+
+```bash
+# Build the app
+npm run build
+
+# Start production server
+npm run start
+```
+
+## 📜 Important Scripts
+
+- `npm run dev-server` - 🔌 Run Socket.io server with Next.js
+- `npm run push` - 📤 Push Prisma schema to database
+- `npm run generate` - ⚙️ Generate Prisma client
+
+## 📁 Project Structure
+
+```
+nb-lab0-chatapp/
+├── app/                  # 📱 Next.js App Router
+├── components/           # 🧩 React components
+├── lib/                  # 🛠️ Utility functions
+├── prisma/               # 🗄️ Prisma schema and migrations
+├── public/               # 🖼️ Static assets
+├── server/               # 🔌 tRPC and Socket.io server code
+├── styles/               # 💅 Global styles
+├── types/                # 📝 TypeScript type definitions
+├── .env                  # 🔐 Environment variables
+├── next.config.js        # ⚙️ Next.js configuration
+├── package.json          # 📦 Project dependencies
+├── server.js             # 🚀 Socket.io server entry
+├── tailwind.config.js    # 🎨 TailwindCSS configuration
+└── tsconfig.json         # 📋 TypeScript configuration
+```
+---
+Made with 👨🏻‍💻 by [niklas.sh](https://niklas.sh)
