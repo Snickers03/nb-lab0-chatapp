@@ -87,16 +87,6 @@ pnpm run push
 pnpm run dev-server
 ```
 
-#### 🚀 Production
-
-```bash
-# Build the app
-npm run build
-
-# Start production server
-npm run start
-```
-
 ## 📜 Important Scripts
 
 - `npm run dev-server` - 🔌 Run Socket.io server with Next.js
