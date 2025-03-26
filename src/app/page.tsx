@@ -2,9 +2,7 @@
 
 import { ChatList } from "@/components/chat-list"
 import { CreateChatForm } from "@/components/create-chat-form"
-import SocketStatus from "@/components/socket-status"
 import { socket } from "@/socket"
-import { MessageCircleIcon } from "lucide-react"
 import { useEffect } from "react"
 import { trpc } from "./_trpc/client"
 
@@ -18,7 +16,6 @@ export default function Home() {
   })
 
   useEffect(() => {
-    // When any client emits "newChat", refetch the chats from the DB.
     const handleNewChat = () => {
       console.log("New chat received from socket, refetching...");
       refetch();
@@ -32,14 +29,7 @@ export default function Home() {
   }, [refetch]);
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <MessageCircleIcon className="h-8 w-8 text-primary" />
-          <h1 className="text-2xl font-bold">lab0: ChatApp</h1>
-        </div>
-        <SocketStatus />
-      </div>
+    <div>
 
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
         <div className="order-2 md:order-1">

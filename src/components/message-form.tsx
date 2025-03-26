@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { socket } from "@/socket"
 import { useState } from "react"
 
 interface Props {
@@ -20,6 +21,10 @@ export function MessageForm({ chatId, addMessage }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!sender.trim() || !content.trim()) return
+
+    console.log("Emitting newChat:", content, "Connected:", socket.connected);
+    
+    socket.emit("newMessage", content);
 
     addMessage({ chatId: Number(chatId), sender, content })
     setContent("")

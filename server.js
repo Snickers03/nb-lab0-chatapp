@@ -16,11 +16,16 @@ app.prepare().then(() => {
 
   io.on("connection", (socket) => {
     console.log("New connection:", socket.id);
+    
     socket.on("newChat", (title) => {
       console.log("Received newChat:", title);
       io.emit("newChat", title);
     });
-    // ...
+
+    socket.on("newMessage", (content) => {
+      console.log("Received newMessage:", content);
+      io.emit("newMessage", content);
+    });
   });
 
   httpServer

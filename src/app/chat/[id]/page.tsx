@@ -5,9 +5,10 @@ import { ChatNotFound } from "@/components/chat-not-found"
 import { MessageForm } from "@/components/message-form"
 import { MessageTable } from "@/components/message-table"
 import { Button } from "@/components/ui/button"
+import { socket } from "@/socket"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import { use } from "react"
+import { use, useEffect } from "react"
 
 export default function ChatPage(props: {
   params: Promise<{ id: string }>;
@@ -21,10 +22,22 @@ export default function ChatPage(props: {
     }
   })
 
-  if (!chat) {
-    return <ChatNotFound />
-  }
-
+    useEffect(() => {
+      const handleNewMessage = () => {
+        console.log("New message received from socket, refetching...");
+        refetch();
+      };
+  
+      socket.on("newMessage", handleNewMessage);
+  
+      return () => {
+        socket.off("newMessage", handleNewMessage);
+      };
+    }, [refetch]);
+    
+    if (!chat) {
+      return <ChatNotFound />
+    }
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="mb-6">
