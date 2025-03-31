@@ -89,9 +89,9 @@ pnpm run dev-server
 
 ## 📜 Important Scripts
 
-- `npm run dev-server` - 🔌 Run Socket.io server with Next.js
-- `npm run push` - 📤 Push Prisma schema to database
-- `npm run generate` - ⚙️ Generate Prisma client
+- `pnpm run dev-server` - 🔌 Run Socket.io server with Next.js
+- `pnpm run push` - 📤 Push Prisma schema to database
+- `pnpm run generate` - ⚙️ Generate Prisma client
 
 ## 📁 Project Structure
 
