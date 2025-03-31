@@ -39,18 +39,18 @@ export default function ChatPage(props: {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <div className="mb-6">
+      <h1 className="text-3xl font-bold mb-6">{chat.topic}</h1>
+      <div className="space-y-6">
+        <MessageTable messages={chat.messages ?? []} />
+        <MessageForm addMessage={addMessage} chatId={params.id} />
+      </div>
+      <div className="mt-6">
         <Link href="/">
           <Button variant="ghost" size="sm" className="gap-2">
             <ArrowLeft className="h-4 w-4" />
             Back to Chats
           </Button>
         </Link>
-      </div>
-      <h1 className="text-3xl font-bold mb-6">{chat.topic}</h1>
-      <div className="space-y-6">
-        <MessageTable messages={chat.messages ?? []} />
-        <MessageForm addMessage={addMessage} chatId={params.id} />
       </div>
     </div>
   )
