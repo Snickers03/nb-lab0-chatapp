@@ -27,4 +27,3 @@ export function ChatList({chats}: Props) {
     </div>
   )
 }
-

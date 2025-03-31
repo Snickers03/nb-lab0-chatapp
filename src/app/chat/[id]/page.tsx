@@ -16,28 +16,27 @@ export default function ChatPage(props: {
   const params = use(props.params);
 
   const { data: chat, refetch } = trpc.chat.getById.useQuery(Number(params.id))
- const { mutate: addMessage } = trpc.message.add.useMutation({
+  const { mutate: addMessage } = trpc.message.add.useMutation({
     onSuccess: () => {
       refetch()
     }
   })
 
-    useEffect(() => {
-      const handleNewMessage = () => {
-        console.log("New message received from socket, refetching...");
-        refetch();
-      };
+  useEffect(() => {
+    const handleNewMessage = () => {
+      console.log("New message received from socket, refetching...");
+      refetch();
+    };
+
+    socket.on("newMessage", handleNewMessage);
+
+    return () => {
+      socket.off("newMessage", handleNewMessage);
+    };
+  }, [refetch]);
   
-      socket.on("newMessage", handleNewMessage);
-  
-      return () => {
-        socket.off("newMessage", handleNewMessage);
-      };
-    }, [refetch]);
-    
-    if (!chat) {
-      return <ChatNotFound />
-    }
+  if (!chat) return <ChatNotFound />
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="mb-6">
@@ -48,9 +47,7 @@ export default function ChatPage(props: {
           </Button>
         </Link>
       </div>
-
       <h1 className="text-3xl font-bold mb-6">{chat.topic}</h1>
-
       <div className="space-y-6">
         <MessageTable messages={chat.messages ?? []} />
         <MessageForm addMessage={addMessage} chatId={params.id} />
@@ -58,4 +55,3 @@ export default function ChatPage(props: {
     </div>
   )
 }
-

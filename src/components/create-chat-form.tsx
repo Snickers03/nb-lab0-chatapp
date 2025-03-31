@@ -3,30 +3,26 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
-import { socket } from "../socket"; // adjust the import path as needed
+import { socket } from "../socket";
 
 interface Props {
   addChat: (topic: string) => void;
 }
 
 export function CreateChatForm({ addChat }: Props) {
-  const [chatTopic, setChatTopic] = useState("");
-  const router = useRouter();
+  const [chatTopic, setChatTopic] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatTopic.trim()) return;
 
-    // Emit the newChat event on the shared socket instance
-    console.log("Emitting newChat:", chatTopic, "Connected:", socket.connected);
+    addChat(chatTopic);
 
+    console.log("Emitting newChat:", chatTopic, "Connected:", socket.connected);
     socket.emit("newChat", chatTopic);
 
-    // add to db
-    addChat(chatTopic);
     setChatTopic("");
   };
 

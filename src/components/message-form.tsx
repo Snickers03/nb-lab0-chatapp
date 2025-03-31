@@ -22,11 +22,11 @@ export function MessageForm({ chatId, addMessage }: Props) {
     e.preventDefault()
     if (!sender.trim() || !content.trim()) return
 
+    addMessage({ chatId: Number(chatId), sender, content })
+
     console.log("Emitting newChat:", content, "Connected:", socket.connected);
-    
     socket.emit("newMessage", content);
 
-    addMessage({ chatId: Number(chatId), sender, content })
     setContent("")
   }
 
@@ -44,7 +44,6 @@ export function MessageForm({ chatId, addMessage }: Props) {
               required
             />
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="content">Message</Label>
             <Textarea
@@ -56,7 +55,6 @@ export function MessageForm({ chatId, addMessage }: Props) {
               required
             />
           </div>
-
           <Button type="submit" className="w-full">
             Send Message
           </Button>
@@ -65,4 +63,3 @@ export function MessageForm({ chatId, addMessage }: Props) {
     </Card>
   )
 }
-
