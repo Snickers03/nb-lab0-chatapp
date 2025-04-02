@@ -6,7 +6,7 @@ import { publicProcedure, router } from "../trpc";
 export const chatRouter = router({
   getAll: publicProcedure
     .query(async () => {
-      const chats =  await prisma.chat.findMany()
+      const chats = await prisma.chat.findMany()
       return chats
     }),
   add: publicProcedure.input(z.string()).mutation(async (opts) => {
